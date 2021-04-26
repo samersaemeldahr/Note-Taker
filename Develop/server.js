@@ -24,15 +24,11 @@ app.get('/api/notes', (req, res) => res.json(database));
 
 
 
-app.get('/api/database', (req, res) => res.json(database));
-
-app.post('/api/database', (req, res) => {
-    database.push(req.body);
+app.post('/api/notes', (req, res) => {
+    const newNote = req.body;
+    
+    database.push(newNote);
     res.json(true);
-//   else {
-//     database.push(req.body);
-//     res.json(false);
-//   }
 });
 
 // app.post('/api/clear', (req, res) => {
