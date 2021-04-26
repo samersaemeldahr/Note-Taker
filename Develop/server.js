@@ -4,7 +4,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const database = require("./db/db.json");
-// const uniqueid = require("uniqeid")
+const uniquid = require("uniqid")
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -22,12 +22,24 @@ app.get('/notes', (req, res) => {
 
 app.get('/api/notes', (req, res) => res.json(database));
 
+app.get('/api/notes:id', (req, res) => {
+    const chosen = req.params.id;
 
+    for (let i = 0; i < database.length; i++) {
+        if (chosen === database[i].id) {
+            return res.json(database[i]);
+        }
+    }
+})
 
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
+    newNote.id = uniquid();
     
     database.push(newNote);
+    fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(database), (err) => {
+        if (err) throw err;
+    })
     res.json(true);
 });
 
