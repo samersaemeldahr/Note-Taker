@@ -11,16 +11,37 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 
-
-require('./public/assets/js/index')(app);
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-})
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, './public/index.html'));
+// })
 
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
+    res.sendFile(path.join(__dirname, '/public/notes.html'));
 });
+
+
+
+
+app.get('/api/database', (req, res) => res.json(database));
+
+app.post('/api/database', (req, res) => {
+    database.push(req.body);
+    res.json(true);
+//   else {
+//     database.push(req.body);
+//     res.json(false);
+//   }
+});
+
+// app.post('/api/clear', (req, res) => {
+//   // Empty out the arrays of data
+//   tableData.length = 0;
+//   waitListData.length = 0;
+
+//   res.json({ ok: true });
+// });
+
+
 
 
 
