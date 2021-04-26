@@ -2,8 +2,8 @@ const path = require("path");
 
 module.exports = (app) => {
 
-  app.get('/reserve', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../reserve.html'));
+  app.get('/notes', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../notes.html'));
   });
 
   // If no matching route is found default to home
