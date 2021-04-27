@@ -1,10 +1,8 @@
 const express = require("express");
-const nodemon = require("nodemon");
-const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const database = require("./db/db.json");
-const uniquid = require("uniqid")
+const uniqid = require("uniqid")
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -34,7 +32,7 @@ app.get('/api/notes:id', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
-    newNote.id = uniquid();
+    newNote.id = uniqid();
     
     database.push(newNote);
     fs.writeFile(path.join(__dirname, '/db/db.json'), JSON.stringify(database), (err) => {
@@ -43,24 +41,10 @@ app.post('/api/notes', (req, res) => {
     res.json(true);
 });
 
-// app.post('/api/clear', (req, res) => {
-//   // Empty out the arrays of data
-//   tableData.length = 0;
-//   waitListData.length = 0;
-
-//   res.json({ ok: true });
-// });
-
-
-
-
-
 // If no matching route is found default to home
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`App listening on PORT: ${PORT}`);
