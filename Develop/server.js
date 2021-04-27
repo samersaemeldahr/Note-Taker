@@ -10,6 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'))
 
+
+// API get requests
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 })
@@ -30,6 +32,8 @@ app.get('/api/notes:id', (req, res) => {
     }
 })
 
+
+// API post requests
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
     newNote.id = uniqid();
@@ -46,6 +50,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
+// listener
 app.listen(PORT, () => {
     console.log(`App listening on PORT: ${PORT}`);
 });
