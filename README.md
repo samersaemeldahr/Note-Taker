@@ -7,6 +7,9 @@
   ## Description 
   An application that can be used to write and save notes. This application is using Express.js and saves and retrieves note data from a JSON file.
 
+  ![app Screenshot 1](./public/assets/photos/screenshot1.png)
+  ![app Screenshot 2](./public/assets/photos/screenshot2.png)
+
   ## Table of Contents
 
   * [License](#license) 
